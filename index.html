@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alma — Contenido que despierta</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #15102A;
+    --surface: #1F1840;
+    --surface2: #2A2250;
+    --amber: #E8C4A0;
+    --lavender: #9B8EC4;
+    --white: #F2EEE8;
+    --muted: #7B7499;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* AURORA BACKGROUND */
+  .aurora {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .aurora::before {
+    content: '';
+    position: absolute;
+    width: 80vw; height: 80vw;
+    top: -20%; left: -10%;
+    background: radial-gradient(ellipse, rgba(155,142,196,0.18) 0%, transparent 70%);
+    animation: drift1 18s ease-in-out infinite alternate;
+    border-radius: 50%;
+  }
+  .aurora::after {
+    content: '';
+    position: absolute;
+    width: 60vw; height: 60vw;
+    bottom: -10%; right: -10%;
+    background: radial-gradient(ellipse, rgba(232,196,160,0.12) 0%, transparent 70%);
+    animation: drift2 22s ease-in-out infinite alternate;
+    border-radius: 50%;
+  }
+  @keyframes drift1 { from { transform: translate(0,0) scale(1); } to { transform: translate(5vw, 8vh) scale(1.1); } }
+  @keyframes drift2 { from { transform: translate(0,0) scale(1); } to { transform: translate(-6vw, -5vh) scale(1.08); } }
+
+  /* LAYOUT */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.4rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(155,142,196,0.1);
+    background: rgba(21,16,42,0.7);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--amber);
+    letter-spacing: 0.04em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 0 5rem;
+    position: relative;
+  }
+  .hero-inner { max-width: 760px; }
+
+  .eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    margin-bottom: 1.8rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--lavender);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    font-weight: 700;
+    line-height: 1.12;
+    margin-bottom: 1.8rem;
+    color: var(--white);
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--amber);
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 540px;
+    margin-bottom: 3rem;
+    line-height: 1.75;
+  }
+
+  .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--amber);
+    color: #15102A;
+    padding: 0.9rem 2rem;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1px solid rgba(155,142,196,0.4);
+    color: var(--lavender);
+    padding: 0.9rem 2rem;
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 0.95rem;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--lavender); color: var(--white); }
+
+  /* SECTIONS */
+  section { padding: 6rem 0; position: relative; z-index: 1; }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    margin-bottom: 1rem;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+    color: var(--white);
+  }
+  h2 em { font-style: italic; color: var(--amber); }
+  .section-intro {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.75;
+    margin-bottom: 3.5rem;
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(155,142,196,0.12);
+    margin: 0;
+  }
+
+  /* QUÉ ES */
+  .que-es-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .que-es-card {
+    background: var(--surface);
+    border: 1px solid rgba(155,142,196,0.12);
+    border-radius: 8px;
+    padding: 2rem 1.8rem;
+    transition: border-color 0.2s;
+  }
+  .que-es-card:hover { border-color: rgba(155,142,196,0.3); }
+  .card-icon {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+  .card-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    color: var(--white);
+  }
+  .card-text { font-size: 0.92rem; color: var(--muted); line-height: 1.65; }
+
+  /* SERVICIOS */
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+  .servicio-card {
+    background: var(--surface);
+    border: 1px solid rgba(155,142,196,0.12);
+    border-radius: 10px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s;
+  }
+  .servicio-card.featured { border-color: rgba(232,196,160,0.35); }
+  .servicio-card.featured::before {
+    content: 'Más solicitado';
+    position: absolute;
+    top: 1.2rem; right: 1.2rem;
+    background: rgba(232,196,160,0.15);
+    color: var(--amber);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    border: 1px solid rgba(232,196,160,0.25);
+  }
+  .servicio-card:hover { border-color: rgba(155,142,196,0.35); }
+  .servicio-name {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--amber);
+  }
+  .servicio-tagline {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 1.8rem;
+  }
+  .servicio-includes { list-style: none; margin-bottom: 2rem; }
+  .servicio-includes li {
+    font-size: 0.9rem;
+    color: var(--white);
+    padding: 0.4rem 0;
+    display: flex; gap: 0.7rem; align-items: flex-start;
+    border-bottom: 1px solid rgba(155,142,196,0.07);
+  }
+  .servicio-includes li:last-child { border-bottom: none; }
+  .check { color: var(--lavender); flex-shrink: 0; margin-top: 2px; }
+
+  /* CÓMO FUNCIONA */
+  .como-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: rgba(155,142,196,0.1);
+    border: 1px solid rgba(155,142,196,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 1rem;
+  }
+  .como-step {
+    background: var(--surface);
+    padding: 2.5rem 2rem;
+  }
+  .step-num {
+    font-family: var(--serif);
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgba(155,142,196,0.2);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .step-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+    color: var(--white);
+  }
+  .step-text { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+  /* PORTFOLIO */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+  .portfolio-card {
+    background: var(--surface);
+    border: 1px solid rgba(155,142,196,0.12);
+    border-radius: 10px;
+    padding: 2.5rem;
+    transition: border-color 0.2s;
+  }
+  .portfolio-card:hover { border-color: rgba(155,142,196,0.3); }
+  .portfolio-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    margin-bottom: 1.2rem;
+  }
+  .tag-espiritual { background: rgba(155,142,196,0.15); color: var(--lavender); border: 1px solid rgba(155,142,196,0.2); }
+  .tag-estoico { background: rgba(232,196,160,0.1); color: var(--amber); border: 1px solid rgba(232,196,160,0.2); }
+
+  .portfolio-name {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .portfolio-desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.65; }
+  .portfolio-stats { display: flex; gap: 2rem; }
+  .stat-val { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; color: var(--amber); display: block; }
+  .stat-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* CONTACTO */
+  .contacto-inner {
+    background: var(--surface);
+    border: 1px solid rgba(155,142,196,0.15);
+    border-radius: 12px;
+    padding: 4rem;
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .contacto-inner h2 { margin-bottom: 0.8rem; }
+  .contacto-inner .section-intro { margin: 0 auto 2.5rem; }
+  .contacto-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer {
+    padding: 2.5rem 0;
+    border-top: 1px solid rgba(155,142,196,0.1);
+    text-align: center;
+    position: relative; z-index: 1;
+  }
+  .footer-logo { font-family: var(--serif); font-size: 1.2rem; color: var(--amber); margin-bottom: 0.5rem; }
+  .footer-text { font-size: 0.8rem; color: var(--muted); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .que-es-grid, .servicios-grid, .como-grid, .portfolio-grid { grid-template-columns: 1fr; }
+    .contacto-inner { padding: 2.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="aurora"></div>
+
+<nav>
+  <div class="nav-logo">Alma</div>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#como">Cómo funciona</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contacto">Contactar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="eyebrow">Agencia de contenido faceless</div>
+      <h1>Tu mensaje merece<br>ser <em>escuchado.</em></h1>
+      <p class="hero-sub">Creamos el sistema de contenido completo para tu canal de YouTube — guiones, SEO, música sin copyright, imágenes y guía de edición — para que tú solo tengas que producir y publicar.</p>
+      <div class="btn-group">
+        <a href="#contacto" class="btn-primary">Hablemos →</a>
+        <a href="#servicios" class="btn-ghost">Ver servicios</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- QUÉ ES -->
+<section id="que-es">
+  <div class="container">
+    <div class="section-label">Quiénes somos</div>
+    <h2>Contenido que <em>despierta.</em></h2>
+    <p class="section-intro">Somos especialistas en canales de YouTube para el espacio de espiritualidad, desarrollo personal y bienestar. Conocemos a tu audiencia porque formamos parte de ella.</p>
+    <div class="que-es-grid">
+      <div class="que-es-card">
+        <div class="card-icon">🎙️</div>
+        <div class="card-title">Guiones con alma</div>
+        <p class="card-text">Escritos para conectar emocionalmente con tu audiencia. Cada palabra pensada para tu nicho, con estructura profesional y tono coherente.</p>
+      </div>
+      <div class="que-es-card">
+        <div class="card-icon">📈</div>
+        <div class="card-title">SEO real</div>
+        <p class="card-text">Títulos, descripciones y etiquetas optimizados. Tu canal aparece donde está tu público, no al azar.</p>
+      </div>
+      <div class="que-es-card">
+        <div class="card-icon">🎵</div>
+        <div class="card-title">Producción guiada</div>
+        <p class="card-text">Música sin copyright de la Biblioteca de YouTube, imágenes stock con términos exactos de búsqueda e instrucciones de edición en CapCut. Tú solo ejecutas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="container">
+    <div class="section-label">Lo que hacemos</div>
+    <h2>Elige cómo <em>trabajamos.</em></h2>
+    <p class="section-intro">Dos formas de trabajar según lo que necesites: solo el contenido escrito para que tú produzcas, o el canal entero terminado y listo para publicar.</p>
+    <p class="section-intro">Dos niveles según lo que necesites: el sistema de contenido escrito para arrancar, o el paquete completo con todo lo que necesitas para producir tu vídeo sin pensar — tú solo montas en CapCut y publicas.</p>
+    <div class="servicios-grid">
+      <div class="servicio-card">
+        <div class="servicio-name">Sistema Básico</div>
+        <div class="servicio-tagline">Todo el contenido escrito, listo para producir.</div>
+        <ul class="servicio-includes">
+          <li><span class="check">✦</span> Guiones completos (intro, desarrollo y cierre)</li>
+          <li><span class="check">✦</span> SEO por vídeo: título, descripción y etiquetas</li>
+          <li><span class="check">✦</span> Scripts de Shorts adaptados de cada vídeo</li>
+          <li><span class="check">✦</span> Calendario de publicación 3 meses</li>
+          <li><span class="check">✦</span> Descripción del canal, keywords y metadatos</li>
+        </ul>
+        <p style="font-size:0.82rem; color:var(--muted); margin-top:1.2rem; line-height:1.5;">Ideal si ya tienes flujo de producción propio. Tú decides cómo grabar, editar y publicar.</p>
+      </div>
+      <div class="servicio-card featured">
+        <div class="servicio-name">Sistema Completo</div>
+        <div class="servicio-tagline">Todo lo que necesitas para producir sin improvisar nada.</div>
+        <ul class="servicio-includes">
+          <li><span class="check">✦</span> Todo lo incluido en el Sistema Básico</li>
+          <li><span class="check">✦</span> Sugerencias de imágenes y vídeo stock con términos exactos de búsqueda (Pexels / Pixabay)</li>
+          <li><span class="check">✦</span> Música sin copyright seleccionada de la Biblioteca de YouTube — nombre exacto de la canción</li>
+          <li><span class="check">✦</span> Indicaciones de velocidad de audio recomendada</li>
+          <li><span class="check">✦</span> Instrucciones de edición paso a paso para montar en CapCut</li>
+        </ul>
+        <p style="font-size:0.82rem; color:var(--muted); margin-top:1.2rem; line-height:1.5;">Recibes todo lo que necesitas para producir tu vídeo sin tener que pensar nada. Solo ejecutas y publicas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CÓMO FUNCIONA -->
+<section id="como">
+  <div class="container">
+    <div class="section-label">El proceso</div>
+    <h2>Así de <em>sencillo.</em></h2>
+    <p class="section-intro">Sin reuniones interminables. Sin tecnicismos. Solo tú, tu visión, y un canal que empieza a crecer.</p>
+    <div class="como-grid">
+      <div class="como-step">
+        <div class="step-num">01</div>
+        <div class="step-title">Hablamos</div>
+        <p class="step-text">Me cuentas tu visión, tu nicho y a quién quieres llegar. Una conversación por WhatsApp es suficiente para empezar.</p>
+      </div>
+      <div class="como-step">
+        <div class="step-num">02</div>
+        <div class="step-title">Creamos</div>
+        <p class="step-text">Desarrollamos el sistema de contenido completo para tu canal: guiones, SEO, calendario, estilo visual y estrategia.</p>
+      </div>
+      <div class="como-step">
+        <div class="step-num">03</div>
+        <div class="step-title">Crece</div>
+        <p class="step-text">Tu canal publica, conecta con su audiencia y crece. Tú te dedicas a lo tuyo. Nosotros hacemos el resto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <div class="section-label">Canales creados</div>
+    <h2>Resultados <em>reales.</em></h2>
+    <p class="section-intro">No vendemos promesas. Aquí están los canales que hemos construido desde cero, con sus números reales.</p>
+    <div class="portfolio-grid">
+      <div class="portfolio-card">
+        <span class="portfolio-tag tag-espiritual">Espiritualidad · Despertar</span>
+        <div class="portfolio-name">Mística Espiritual</div>
+        <p class="portfolio-desc">Canal de espiritualidad, signos y sincronicidades. Sistema completo creado desde cero: guiones, voz IA, SEO, Shorts y estrategia de crecimiento.</p>
+        <div class="portfolio-stats">
+          <div><span class="stat-val">72%</span><span class="stat-label">Tráfico desde Shorts</span></div>
+          <div><span class="stat-val">64%</span><span class="stat-label">Audiencia femenina</span></div>
+          <div><span class="stat-val">85%</span><span class="stat-label">Visualizaciones móvil</span></div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <span class="portfolio-tag tag-estoico">Filosofía · Estoicismo</span>
+        <div class="portfolio-name">Imperio Estoico</div>
+        <p class="portfolio-desc">Canal de filosofía estoica práctica basada en Marco Aurelio, Séneca y Epicteto. Sistema de contenido completo con identidad visual cinematic.</p>
+        <div class="portfolio-stats">
+          <div><span class="stat-val">72%</span><span class="stat-label">Audiencia masculina</span></div>
+          <div><span class="stat-val">85%</span><span class="stat-label">Visualizaciones móvil</span></div>
+          <div><span class="stat-val">30+</span><span class="stat-label">Scripts de Shorts</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="container">
+    <div class="contacto-inner">
+      <div class="section-label" style="text-align:center">Hablemos</div>
+      <h2>¿Lista para <em>empezar?</em></h2>
+      <p class="section-intro">¿Tienes un proyecto en mente? Escríbeme primero por WhatsApp o email y agendamos una llamada para conocernos. Sin prisas, sin compromisos.</p>
+      <p style="font-size:0.85rem; color:var(--muted); margin-bottom:2rem; font-style:italic;">El primer contacto es siempre por escrito — te respondo en menos de 24h.</p>
+      <div class="contacto-links">
+        <a href="https://wa.me/34601675540?text=Hola%2C%20me%20interesa%20el%20servicio%20de%20Alma.%20%C2%BFPodemos%20hablar%3F" class="btn-primary" target="_blank">💬 Escríbeme por WhatsApp</a>
+        <a href="mailto:misticaespiritual042@gmail.com?subject=Me%20interesa%20Alma" class="btn-ghost">✉️ Envíame un email</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-logo">Alma</div>
+    <p class="footer-text">Contenido que despierta · Especialistas en canales faceless de espiritualidad y desarrollo personal</p>
+  </div>
+</footer>
+
+</body>
+</html>
