@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,7 +32,6 @@
     overflow-x: hidden;
   }
 
-  /* AURORA BACKGROUND */
   .aurora {
     position: fixed;
     inset: 0;
@@ -60,10 +60,8 @@
   @keyframes drift1 { from { transform: translate(0,0) scale(1); } to { transform: translate(5vw, 8vh) scale(1.1); } }
   @keyframes drift2 { from { transform: translate(0,0) scale(1); } to { transform: translate(-6vw, -5vh) scale(1.08); } }
 
-  /* LAYOUT */
   .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
 
-  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0;
     z-index: 100;
@@ -91,7 +89,6 @@
   }
   .nav-links a:hover { color: var(--white); }
 
-  /* HERO */
   .hero {
     min-height: 100vh;
     display: flex; align-items: center;
@@ -123,10 +120,7 @@
     margin-bottom: 1.8rem;
     color: var(--white);
   }
-  h1 em {
-    font-style: italic;
-    color: var(--amber);
-  }
+  h1 em { font-style: italic; color: var(--amber); }
 
   .hero-sub {
     font-size: 1.15rem;
@@ -166,7 +160,6 @@
   }
   .btn-ghost:hover { border-color: var(--lavender); color: var(--white); }
 
-  /* SECTIONS */
   section { padding: 6rem 0; position: relative; z-index: 1; }
 
   .section-label {
@@ -193,14 +186,12 @@
     margin-bottom: 3.5rem;
   }
 
-  /* DIVIDER */
   .divider {
     border: none;
     border-top: 1px solid rgba(155,142,196,0.12);
     margin: 0;
   }
 
-  /* QUÉ ES */
   .que-es-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -215,10 +206,7 @@
     transition: border-color 0.2s;
   }
   .que-es-card:hover { border-color: rgba(155,142,196,0.3); }
-  .card-icon {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-  }
+  .card-icon { font-size: 1.6rem; margin-bottom: 1rem; }
   .card-title {
     font-family: var(--serif);
     font-size: 1.2rem;
@@ -228,7 +216,6 @@
   }
   .card-text { font-size: 0.92rem; color: var(--muted); line-height: 1.65; }
 
-  /* SERVICIOS */
   .servicios-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -266,11 +253,7 @@
     margin-bottom: 0.5rem;
     color: var(--amber);
   }
-  .servicio-tagline {
-    font-size: 0.95rem;
-    color: var(--muted);
-    margin-bottom: 1.8rem;
-  }
+  .servicio-tagline { font-size: 0.95rem; color: var(--muted); margin-bottom: 1.8rem; }
   .servicio-includes { list-style: none; margin-bottom: 2rem; }
   .servicio-includes li {
     font-size: 0.9rem;
@@ -282,7 +265,6 @@
   .servicio-includes li:last-child { border-bottom: none; }
   .check { color: var(--lavender); flex-shrink: 0; margin-top: 2px; }
 
-  /* CÓMO FUNCIONA */
   .como-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -293,10 +275,7 @@
     overflow: hidden;
     margin-top: 1rem;
   }
-  .como-step {
-    background: var(--surface);
-    padding: 2.5rem 2rem;
-  }
+  .como-step { background: var(--surface); padding: 2.5rem 2rem; }
   .step-num {
     font-family: var(--serif);
     font-size: 3rem;
@@ -314,7 +293,6 @@
   }
   .step-text { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
 
-  /* PORTFOLIO */
   .portfolio-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -340,7 +318,6 @@
   }
   .tag-espiritual { background: rgba(155,142,196,0.15); color: var(--lavender); border: 1px solid rgba(155,142,196,0.2); }
   .tag-estoico { background: rgba(232,196,160,0.1); color: var(--amber); border: 1px solid rgba(232,196,160,0.2); }
-
   .portfolio-name {
     font-family: var(--serif);
     font-size: 1.5rem;
@@ -352,7 +329,6 @@
   .stat-val { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; color: var(--amber); display: block; }
   .stat-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
 
-  /* CONTACTO */
   .contacto-inner {
     background: var(--surface);
     border: 1px solid rgba(155,142,196,0.15);
@@ -366,7 +342,6 @@
   .contacto-inner .section-intro { margin: 0 auto 2.5rem; }
   .contacto-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
-  /* FOOTER */
   footer {
     padding: 2.5rem 0;
     border-top: 1px solid rgba(155,142,196,0.1);
@@ -376,7 +351,6 @@
   .footer-logo { font-family: var(--serif); font-size: 1.2rem; color: var(--amber); margin-bottom: 0.5rem; }
   .footer-text { font-size: 0.8rem; color: var(--muted); }
 
-  /* RESPONSIVE */
   @media (max-width: 768px) {
     .nav-links { display: none; }
     .que-es-grid, .servicios-grid, .como-grid, .portfolio-grid { grid-template-columns: 1fr; }
@@ -394,6 +368,7 @@
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#como">Cómo funciona</a></li>
     <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#consultorio">Consultorio</a></li>
     <li><a href="#contacto">Contactar</a></li>
   </ul>
 </nav>
@@ -424,7 +399,7 @@
     <div class="que-es-grid">
       <div class="que-es-card">
         <div class="card-icon">🎙️</div>
-      <a href="https://calendly.com/misticaespiritual042" target="_blank" class="btn-primary">Hablemos →</a>
+        <div class="card-title">Guiones que conectan</div>
         <p class="card-text">Escritos para conectar emocionalmente con tu audiencia. Cada palabra pensada para tu nicho, con estructura profesional y tono coherente.</p>
       </div>
       <div class="que-es-card">
@@ -448,7 +423,6 @@
   <div class="container">
     <div class="section-label">Lo que hacemos</div>
     <h2>Elige cómo <em>trabajamos.</em></h2>
-    <p class="section-intro">Dos formas de trabajar según lo que necesites: solo el contenido escrito para que tú produzcas, o el canal entero terminado y listo para publicar.</p>
     <p class="section-intro">Dos niveles según lo que necesites: el sistema de contenido escrito para arrancar, o el paquete completo con todo lo que necesitas para producir tu vídeo sin pensar — tú solo montas en CapCut y publicas.</p>
     <div class="servicios-grid">
       <div class="servicio-card">
@@ -536,6 +510,37 @@
           <div><span class="stat-val">30+</span><span class="stat-label">Scripts de Shorts</span></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONSULTORIO -->
+<section id="consultorio">
+  <div class="container">
+    <div class="section-label">Acompañamiento personal</div>
+    <h2>Cuando el camino <em>llama.</em></h2>
+    <p class="section-intro">A veces no se trata de crear un canal. Se trata de encontrar claridad. Si sientes que algo en tu vida está pidiendo un cambio, aquí tienes un espacio para hablarlo con alguien que lleva más de 15 años en el camino espiritual.</p>
+    <div class="que-es-grid">
+      <div class="que-es-card">
+        <div class="card-icon">🌙</div>
+        <div class="card-title">Sesión de orientación</div>
+        <p class="card-text">30 minutos para poner en orden lo que sientes. Hablamos de lo que necesites — sin juicios, sin prisas, con presencia.</p>
+      </div>
+      <div class="que-es-card">
+        <div class="card-icon">✨</div>
+        <div class="card-title">Señales y sincronicidades</div>
+        <p class="card-text">¿Estás viendo señales que no sabes interpretar? Te ayudo a leerlas y entender qué te están diciendo.</p>
+      </div>
+      <div class="que-es-card">
+        <div class="card-icon">🔮</div>
+        <div class="card-title">Claridad y dirección</div>
+        <p class="card-text">Para momentos de encrucijada. Cuando tienes varias opciones y necesitas escuchar tu voz interior con alguien que te acompañe.</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:2.5rem;">
+      <a href="https://calendly.com/misticaespiritual042/30min" target="_blank" class="btn-primary">Reservar sesión gratuita →</a>
     </div>
   </div>
 </section>
